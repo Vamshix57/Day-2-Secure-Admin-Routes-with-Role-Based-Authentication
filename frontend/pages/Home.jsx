@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function Home() {
-  const [email, setEmail] = useState("");
+  const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user"); // Default role is user
   const [errorMessage, setErrorMessage] = useState("");
@@ -11,12 +11,12 @@ function Home() {
   const handleRegister = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/auth/register", {
-        email,
+        username,
         password,
         role
       });
       alert('Registration successful!');
-      setEmail('');
+      setUserName('');
       setPassword('');
       setRole('user');
     } catch (error) {
@@ -27,7 +27,7 @@ function Home() {
   const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/auth/login", {
-        email,
+        username,
         password
       });
       localStorage.setItem("token", response.data.token);
@@ -42,10 +42,10 @@ function Home() {
       <h1>{isLogin ? "Login" : "Register"}</h1>
 
       <input 
-        type="email" 
-        placeholder="Email" 
-        value={email} 
-        onChange={(e) => setEmail(e.target.value)} 
+        type="username" 
+        placeholder="username" 
+        value={username} 
+        onChange={(e) => setUserName(e.target.value)} 
       />
       <input 
         type="password" 
